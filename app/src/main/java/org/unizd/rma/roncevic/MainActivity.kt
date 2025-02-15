@@ -27,7 +27,10 @@ class MainActivity : ComponentActivity() {
             MyDrawingsAppTheme {
                 val navController = rememberNavController()
 
-                NavHost(navController = navController,startDestination = ""){
+                NavHost(
+                    navController = navController,
+                    startDestination = Route.drawingList
+                ){
                     composable(route = Route.drawingList){
                         val viewModel = hiltViewModel<DrawingListViewModel>()
                         val drawingList by viewModel.drawingList.collectAsStateWithLifecycle()
