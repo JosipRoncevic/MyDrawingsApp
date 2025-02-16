@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                                 )
                             },
                             onAddDrawingClick = {
-                                navController.navigate(Route.drawing)
+                                navController.navigate(Route.newDrawing)
                             }
                         )
                     }
@@ -66,6 +66,26 @@ class MainActivity : ComponentActivity() {
                         }
                         DrawingScreen(
                             state= state,
+                            onEvent = viewModel::onEvent
+                        )
+                    }
+                    composable(route = Route.newDrawing) {
+                        val viewModel = hiltViewModel<DrawingViewModel>()
+                        val state by viewModel.state.collectAsStateWithLifecycle()
+
+                        LaunchedEffect(key1 = true) {
+                            viewModel.event.collect { event ->
+                                when (event) {
+                                    is UiEvent.NavigateBack -> {
+                                        navController.popBackStack() // Ensure navigation works on Save/Delete/Back
+                                    }
+                                    else -> Unit
+                                }
+                            }
+                        }
+
+                        DrawingScreen(
+                            state = state,
                             onEvent = viewModel::onEvent
                         )
                     }

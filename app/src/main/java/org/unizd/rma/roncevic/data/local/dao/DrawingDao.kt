@@ -15,8 +15,8 @@ interface DrawingDao {
     @Query("SELECT * FROM DrawingEntity")
     fun getAllDrawings(): Flow<List<DrawingEntity>>
 
-    @Query("SELECT * FROM DrawingEntity WHERE id = :id")
-    suspend fun getDrawingById(id: Int): DrawingEntity
+    @Query("""SELECT * FROM DrawingEntity WHERE id = :id""")
+    suspend fun getDrawingById(id: Int): DrawingEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDrawing(drawingEntity: DrawingEntity)

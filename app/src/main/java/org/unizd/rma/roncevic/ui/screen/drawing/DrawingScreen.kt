@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package org.unizd.rma.roncevic.ui.screen.drawing
 
 import androidx.compose.foundation.layout.Arrangement
@@ -7,7 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.ArrowBackIosNew
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -22,7 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun DrawingScreen(
     state: DrawingState,
@@ -31,7 +33,7 @@ fun DrawingScreen(
     Scaffold (
         topBar = {
             CenterAlignedTopAppBar(
-                title = { TODO() },
+                title = { "Drawing details" },
                 navigationIcon = {
                     IconButton(
                         onClick = {
@@ -39,8 +41,8 @@ fun DrawingScreen(
                         }
                     ) {
                         Icon(
-                            imageVector = Icons.Rounded.ArrowBack,
-                            contentDescription = "Navigate back")
+                            imageVector = Icons.Rounded.ArrowBackIosNew,
+                            contentDescription = "navigate back")
                     }
                 },
                 actions = {
@@ -51,16 +53,16 @@ fun DrawingScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Rounded.Delete,
-                            contentDescription = "Delete")
+                            contentDescription = "delete")
                     }
                 }
             )
         }
-    ) { paddingValues ->
+    ) { padding ->
         Column (
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
+                .padding(padding)
                 .padding(
                     horizontal = 20.dp,
                     vertical = 15.dp

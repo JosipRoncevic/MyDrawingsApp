@@ -8,7 +8,8 @@ import org.unizd.rma.roncevic.data.mapper.toEntity
 import org.unizd.rma.roncevic.domain.model.Drawing
 import org.unizd.rma.roncevic.domain.repository.DrawingRepository
 
-class DrawingRepositoryImpl(private val dao: DrawingDao
+class DrawingRepositoryImpl(
+    private val dao: DrawingDao
 ):DrawingRepository {
     override fun getAllDrawings(): Flow<List<Drawing>> {
         return dao.getAllDrawings()

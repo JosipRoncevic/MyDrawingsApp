@@ -73,7 +73,7 @@ class DrawingViewModel @Inject constructor(
                     val drawing = Drawing(
                         id = state.id,
                         title = state.title,
-                        author = state.title
+                        author = state.author
                     )
                     if(state.id==null){
                         repository.insertDrawing(drawing)
@@ -92,7 +92,7 @@ class DrawingViewModel @Inject constructor(
                     val drawing = Drawing(
                         id = state.id,
                         title = state.title,
-                        author = state.title
+                        author = state.author
                     )
                     repository.deleteDrawing(drawing)
                 }

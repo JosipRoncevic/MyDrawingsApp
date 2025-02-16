@@ -16,7 +16,7 @@ class DrawingListViewModel @Inject constructor(
     val drawingList = repository.getAllDrawings()
         .stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5000),
+            started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList()
 
     )
