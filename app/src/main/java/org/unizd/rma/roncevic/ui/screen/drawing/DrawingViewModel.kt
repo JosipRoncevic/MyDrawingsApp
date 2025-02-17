@@ -42,7 +42,9 @@ class DrawingViewModel @Inject constructor(
                         screenState.copy(
                             id =drawing.id,
                             title = drawing.title,
-                            author = drawing.author
+                            author = drawing.author,
+                            theme = drawing.theme,
+                            date = drawing.date
                         )
                     }
                 }
@@ -66,6 +68,21 @@ class DrawingViewModel @Inject constructor(
                     )
                 }
             }
+            is DrawingEvent.ThemeChange ->{
+                _state.update {
+                    it.copy(
+                        theme = event.value
+                    )
+                }
+            }
+            is DrawingEvent.DateChange -> {
+                _state.update {
+                    it.copy(
+                        date = event.value
+                    )
+                }
+            }
+
             DrawingEvent.NavigateBack -> sendEvent(UiEvent.NavigateBack)
             DrawingEvent.Save -> {
                 viewModelScope.launch {
@@ -73,7 +90,9 @@ class DrawingViewModel @Inject constructor(
                     val drawing = Drawing(
                         id = state.id,
                         title = state.title,
-                        author = state.author
+                        author = state.author,
+                        theme = state.theme,
+                        date = state.date
                     )
                     if(state.id==null){
                         repository.insertDrawing(drawing)
@@ -92,7 +111,9 @@ class DrawingViewModel @Inject constructor(
                     val drawing = Drawing(
                         id = state.id,
                         title = state.title,
-                        author = state.author
+                        author = state.author,
+                        theme = state.theme,
+                        date = state.date
                     )
                     repository.deleteDrawing(drawing)
                 }
