@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
                             viewModel.event.collect { event ->
                                 when (event) {
                                     is UiEvent.NavigateBack -> {
-                                        navController.popBackStack() // Ensure navigation works on Save/Delete/Back
+                                        navController.popBackStack()
                                     }
                                     else -> Unit
                                 }

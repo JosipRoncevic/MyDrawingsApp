@@ -5,9 +5,9 @@ import org.unizd.rma.roncevic.domain.model.Drawing
 
 
 fun DrawingEntity.asExternalModel(): Drawing = Drawing(
-    id, title,author, theme, date
+    id, title,author, theme, date, imageUri
 )
 
 fun Drawing.toEntity():DrawingEntity=DrawingEntity(
-    id, title,author, theme, date
+    id, title,author, theme, date, imageUri
 )

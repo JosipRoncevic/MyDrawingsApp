@@ -5,5 +5,6 @@ data class DrawingState(
     val title: String= "",
     val author: String = "",
     val theme: String = "",
-    val date: String = ""
+    val date: String = "",
+    val imageUri: String? = null
 )

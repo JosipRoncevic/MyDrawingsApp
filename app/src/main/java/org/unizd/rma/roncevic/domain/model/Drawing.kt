@@ -5,6 +5,7 @@ data class Drawing(
     val title: String = "",
     val author: String = "",
     val theme: String = "",
-    val date: String = ""
+    val date: String = "",
+    val imageUri : String? = null
 
 )

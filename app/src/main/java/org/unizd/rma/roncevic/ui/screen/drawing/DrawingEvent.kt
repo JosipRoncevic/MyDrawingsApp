@@ -5,6 +5,7 @@ sealed interface DrawingEvent {
     data class AuthorChange(val value: String): DrawingEvent
     data class ThemeChange(val value: String) : DrawingEvent
     data class DateChange(val value: String) : DrawingEvent
+    data class ImageChange(val value: String): DrawingEvent
     object Save: DrawingEvent
     object NavigateBack: DrawingEvent
     object DeleteDrawing: DrawingEvent

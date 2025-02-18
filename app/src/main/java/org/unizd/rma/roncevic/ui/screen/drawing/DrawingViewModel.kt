@@ -44,7 +44,8 @@ class DrawingViewModel @Inject constructor(
                             title = drawing.title,
                             author = drawing.author,
                             theme = drawing.theme,
-                            date = drawing.date
+                            date = drawing.date,
+                            imageUri = drawing.imageUri
                         )
                     }
                 }
@@ -82,6 +83,13 @@ class DrawingViewModel @Inject constructor(
                     )
                 }
             }
+            is DrawingEvent.ImageChange -> {
+                _state.update {
+                    it.copy(
+                        imageUri = event.value)
+                }
+            }
+
 
             DrawingEvent.NavigateBack -> sendEvent(UiEvent.NavigateBack)
             DrawingEvent.Save -> {
@@ -92,7 +100,8 @@ class DrawingViewModel @Inject constructor(
                         title = state.title,
                         author = state.author,
                         theme = state.theme,
-                        date = state.date
+                        date = state.date,
+                        imageUri = state.imageUri
                     )
                     if(state.id==null){
                         repository.insertDrawing(drawing)
@@ -113,7 +122,8 @@ class DrawingViewModel @Inject constructor(
                         title = state.title,
                         author = state.author,
                         theme = state.theme,
-                        date = state.date
+                        date = state.date,
+                        imageUri = state.imageUri
                     )
                     repository.deleteDrawing(drawing)
                 }
