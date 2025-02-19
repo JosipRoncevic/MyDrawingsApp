@@ -27,10 +27,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberPermissionState
@@ -46,7 +44,6 @@ fun DrawingScreen(
     state: DrawingState,
     onEvent: (DrawingEvent) -> Unit
 ) {
-
     val themes = listOf("Romance", "Fantasy", "Mystery", "Horror", "Sci-Fi")
     var expanded by remember { mutableStateOf(false) }
     var imagePath by remember { mutableStateOf<String?>(null) }
@@ -131,7 +128,7 @@ fun DrawingScreen(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text("Drawing details") },
+                title = { Text("Drawing details", style = MaterialTheme.typography.titleLarge) },
                 navigationIcon = {
                     IconButton(onClick = { onEvent(DrawingEvent.NavigateBack) }) {
                         Icon(imageVector = Icons.Filled.ArrowBackIosNew, contentDescription = "Navigate back")
@@ -168,6 +165,7 @@ fun DrawingScreen(
                     }
                 }
             )
+
             OutlinedTextField(
                 value = state.author,
                 modifier = Modifier.fillMaxWidth(),
@@ -226,7 +224,7 @@ fun DrawingScreen(
             Button(
                 onClick = { shouldShowPhotoDialog = true },
                 modifier = Modifier.align(Alignment.CenterHorizontally).padding(bottom = 8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3))
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Icon(Icons.Default.CameraAlt, contentDescription = "Take Picture")
                 Spacer(modifier = Modifier.width(8.dp))
@@ -239,6 +237,8 @@ fun DrawingScreen(
                     it, Modifier
                         .height(200.dp)
                         .clip(RoundedCornerShape(16.dp))
+                        .background(MaterialTheme.colorScheme.surface)
+                        .align(Alignment.CenterHorizontally) // Center the image
                 )
             }
 
@@ -262,15 +262,16 @@ fun DrawingScreen(
                             onEvent(DrawingEvent.Save)
                         }
                     },
-                    modifier = Modifier.fillMaxWidth(0.5f)
+                    modifier = Modifier.fillMaxWidth(0.5f),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                 ) {
                     Text(text = "Save")
                 }
             }
         }
     }
-
 }
+
 private fun savePhotoToInternalStorage(context: Context, uri: Uri): String? {
     return try {
         val bitmap = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
