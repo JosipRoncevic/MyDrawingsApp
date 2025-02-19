@@ -65,7 +65,15 @@ fun DrawingScreen(
 
     val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = PickVisualMedia(),
-        onResult = { it?.let { imagePath = savePhotoToInternalStorage(context, it) } }
+        onResult = { uri: Uri? ->
+            uri?.let {
+                val savedPath = savePhotoToInternalStorage(context, it)
+                if (savedPath != null) {
+                    imagePath = savedPath
+                    onEvent(DrawingEvent.ImageChange(savedPath))
+                }
+            }
+        }
     )
 
     val cameraPermissionState = rememberPermissionState(
